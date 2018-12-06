@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:we_love_dogs/dog_model.dart';
+import 'dog_model.dart';
 
 class DogDetailPage extends StatefulWidget {
   final Dog dog;
@@ -56,7 +56,6 @@ class _DogDetailPageState extends State<DogDetailPage> {
     return RaisedButton(
       onPressed: () {
         updateRating();
-        Navigator.of(context).pop();
       },
       child: Text('Submit'),
       color: Colors.indigoAccent,
@@ -150,6 +149,7 @@ class _DogDetailPageState extends State<DogDetailPage> {
       setState(() {
         widget.dog.rating = _sliderValue.toInt();
       });
+      Navigator.of(context).pop();
     }
   }
 
@@ -170,6 +170,12 @@ class _DogDetailPageState extends State<DogDetailPage> {
             ],
           );
         });
+  }
+
+  @override
+  void initState() {
+    this._sliderValue = widget.dog.rating.toDouble();
+    super.initState();
   }
 
   @override
